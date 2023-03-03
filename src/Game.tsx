@@ -4,6 +4,12 @@ import * as A from './StyledGame';
 import Card from "./Components/Card";
 
 const Game= () => {
+  const [auxCard, setAuxCard] = useState(
+    [{primeiro : 0},
+    {primeiro : 0},])
+
+  const [verify, setVerify] = useState(0)
+
   const [cards, setCards] = useState([
     {id: 1, value: 1, clicked: false},
     {id: 2, value: 1, clicked: false},
@@ -21,9 +27,19 @@ const Game= () => {
   ])
 
   const handlerCLick = (index : number) =>{
+    let contador = verify + 1
+    setVerify(contador)
+    if(contador == 2){
+      setVerify(0)
+      let auxcard = [...cards]
+      for(let i in cards){
+        auxcard[i].clicked = false
+        setCards(auxcard)
+      }
+    }
     let NewCard = [...cards]
       NewCard[index].clicked = !NewCard[index].clicked;
-      setCards(NewCard) 
+      setCards(NewCard)
   }
   return (
     <A.Container>
@@ -33,13 +49,13 @@ const Game= () => {
         key={index}
         id={item.id}
         value={item.value}
-        onClick={()=> handlerCLick(index)}
+        onClick={()=> {handlerCLick(index)}}
         clicked={item.clicked}
-
+        
         />
        </>
-        
       ))}
+      {verify}
     </A.Container>
     
   );

@@ -15,7 +15,7 @@ const Card: React.FC<Props> = ({id,value,clicked,onClick}) => {
     </CardWrapper> */
 
       <A.Cards clicked={clicked} onClick={onClick}>
-        {clicked.toString()}
+        {clicked ? value: <FaQuestion />}
       </A.Cards>
 
 
